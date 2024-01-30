@@ -1,3 +1,150 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body {
+    @apply text-secondary font-primary text-[15px] overflow-x-hidden
+    }
+    h1,h2,h3,h4,h5,h6 { 
+        @apply text-primary leading-[120%]
+    }
+    .h1 {
+    
+        @apply text-[36px] xl:text-[64px] font-semibold
+    }
+    
+    .h2 {
+    @apply text-[36px] xl:text-[44px] font-semibold capitalize tracking-[0.44px];
+    
+    }
+    
+    .h3{
+    @apply text-[20px] xl:text-[26px] font-semibold
+    
+    }
+    .h4{ 
+    @apply text-[20px] xl:text-[26px] font-semibold capitalize
+    
+    }
+    
+    .btn{
+    @apply rounded-full uppercase tracking-[1.02px] flex items-center justify-center transition-all
+    
+    }
+    
+    .btn-sm {
+    
+        @apply h-8 px-4
+    }
+    
+    .btn-lg {
+        @apply h-16 px-[50px]
+    }
+    
+    .btn-accent {
+    @apply bg-accent text-white hover:bg-accent-secondary
+    
+    }
+    .btn-white {
+    @apply bg-white text-secondary hover:bg-white/90;
+    
+    }
+    
+    .btn-outline {
+    @apply bg-transparent py-2 px-2 border-2 border-accent text-secondary hover:bg-accent
+    hover:border-transparent hover:text-white 
+    }
+    
+    .input, .select {
+        @apply w-full rounded-[40px] h-[66px] outline-none border border-[#dbdfdf] 
+        text-secondary font-light placeholder:font-light placeholder:text-secondary
+        placeholder:text-lg
+    }
+    
+    .input {
+        @apply px-4
+    }
+    
+    .section {
+        @apply mt-3 py-12 xl:py-[150px]
+    }
+    
+    /* Explore by Category */
+  .ebc{
+    @apply absolute w-[363px] h-[48px] left-[183px] top-[763px] 
+    font-primary font-normal text-xl leading-6 tracking-tighter
+  }
+  
+  @screen lg {
+      .bg-hero{
+          width: 2000px;
+          height: 300px;
+          left: 30%; 
+          @apply absolute rounded-l-full top-52 bg-accent-tertiary 
+      }
+      .bg-tabs{
+          width: 2000px;
+          height: 200px;
+          right: 60%; 
+          @apply absolute rounded-r-full top-60 bg-accent 
+      }
+  }
+  
+
+
+
+
+.hamburger {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    transition: all 0.25s;
+    position: relative;
+  }
+  
+  .hamburger-top,
+  .hamburger-middle,
+  .hamburger-bottom {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 3px;
+    top: 0;
+    left: 0;
+    background: #000;
+    transform: rotate(0);
+    transition: all 0.5s;
+  }
+  
+  .hamburger-middle {
+    transform: translateY(7px);
+  }
+  
+
+.hamburger-bottom {
+transform: translateY(14px);
+background: #000;
+}
+
+.open {
+transform: rotate(90deg);
+transform: translateY(0px);
+position: fixed;
+top: 50px;
+right: 25px;
+}
+
+.open .hamburger-top {
+transform: rotate(45deg) translateY(6px) translateX(6px);
+background-color: #fff;
+}
+
+.open .hamburger-middle {
+display: none;
+}
+
+.open .hamburger-bottom {
+transform: rotate(-45deg) translateY(6px) translateX(-6px);
+background-color: #fff;
+}
