@@ -39,11 +39,9 @@ export default {
         // 'Plus Jakarta Sans'
       },
       fontFamily:{
-        primary: ['Rubik', 'sans-serif']
+        primary: ['Montserrat', 'sans-serif']
       },
-      // backgroundImage: ()=>({
-      //   dots: 'url(../public/img/images/bg-dots.svg)'
-      // }),
+      
       backgroundImage:{
         dots: 'url(/img/images/bg-dots.svg)',
       },
