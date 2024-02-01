@@ -1,12 +1,25 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import jobs from '../jobs'
+import { Link, useParams } from 'react-router-dom'
+import { useEffect, useState } from'react'
 
 const JobDetailScreen = () => {
+    const [job, setJob] = useState({})
     const { id:jobId } = useParams()
-    const job = jobs.find(job =>{
-        return job.id === Number(jobId)
-    } )
+
+    
+    // const job = jobs.find(job =>{
+    //     return job.id === Number(jobId)
+    // } )
+
+    useEffect(() => {
+const fetchJobs = async () => {
+       const res = await fetch(`/jobs/${jobId}`)
+        const data = await res.json()
+        setJob(data)
+}
+fetchJobs()
+
+    }, [jobId])
    
    
   return (
@@ -46,22 +59,23 @@ const JobDetailScreen = () => {
     <h2 className="text-2xl font-semibold text-black">Resources</h2>
     <div className='w-2/3 border-2 p-1 overflow-auto text-center rounded-md'>
       <h5>Twitter</h5>
-        <p>{job.socialMedia.twitter}</p>
+        <p>{job.sector}</p>
   </div>
     <div className='w-2/3 border-2 p-1 overflow-auto text-center rounded-md mt-1'>
       <h5>Twitter</h5>
-        <p>{job.socialMedia.twitter}</p> 
+        <p>{job.sector}</p> 
   </div>
     <div className='w-2/3 border-2 p-1 overflow-auto text-center rounded-md mt-1'>
       <h5>Twitter</h5>
-        <p>{job.socialMedia.twitter}</p>
+        <p>{job.sector}</p>
   </div>
 </div>
   
 </div>
 
 </div>
-<button className= "container ml-2 mx-auto w-1/6 bg-blue-500 text-white px-1 py-1 rounded mt-2">Back</button>
+
+<button className= "container ml-2 mx-auto w-1/6 bg-blue-500 text-white px-1 py-1 rounded mt-2"><Link to='/'>Back</Link></button>
     </>
   );
 
