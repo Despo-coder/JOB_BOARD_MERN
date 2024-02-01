@@ -1,19 +1,22 @@
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// App.js
+import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import { Outlet, useLocation } from 'react-router-dom';
 
 function App() {
+  
+  const navigate = useLocation();
+
+  // Function to check if the current route is the index route ("/")
+  const isIndexRoute = () => navigate && navigate.pathname === '/';
+
   return (
     <div className="App">
-      <Router>
+
       <Navbar />
-      <Hero />
-        <Routes>
-          {/* <Route path="/" element={<Navbar />} /> */}
-        </Routes>
-      </Router>
-    
+      {isIndexRoute() && <Hero />}
+      <Outlet />
     </div>
   );
 }

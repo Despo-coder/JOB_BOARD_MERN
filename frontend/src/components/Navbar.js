@@ -11,9 +11,9 @@ const Navbar = () => {
 
   return (
     <div className="container mx-auto flex flex-col p-6 lg:flex-row lg:mb-0">
-    <div className='flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-black'>
+    <div className='flex justify-between items-center w-full h-24 px-4 text-black'>
       <h1 className='w-full text-3xl font-semibold text-primary'>Side Hustle World</h1>
-     
+      
       <ul className='hidden md:flex'>
         <li className='p-4'>Home</li>
         

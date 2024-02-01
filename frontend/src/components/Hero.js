@@ -1,5 +1,5 @@
 import React from 'react'
-import {FaMapPin, FaSearchLocation} from 'react-icons/fa'
+import { FaSearchLocation} from 'react-icons/fa'
 
 const Hero = () => {
   return (
