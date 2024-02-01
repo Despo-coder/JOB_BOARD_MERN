@@ -1,7 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
+import connectDB from './configurations/db.js';
 import jobs from './data/jobs.js';
+
+connectDB();
 
 const port = process.env.PORT || 5000;
 

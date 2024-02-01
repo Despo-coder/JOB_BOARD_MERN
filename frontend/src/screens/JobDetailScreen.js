@@ -6,10 +6,6 @@ const JobDetailScreen = () => {
     const [job, setJob] = useState({})
     const { id:jobId } = useParams()
 
-    
-    // const job = jobs.find(job =>{
-    //     return job.id === Number(jobId)
-    // } )
 
     useEffect(() => {
 const fetchJobs = async () => {
@@ -57,17 +53,17 @@ fetchJobs()
   <p>{job.detailedInfo}</p>
   <div className='mt-12'>
     <h2 className="text-2xl font-semibold text-black">Resources</h2>
-    <div className='w-2/3 border-2 p-1 overflow-auto text-center rounded-md'>
+    <div className='w-3/4 border-2 p-1 overflow-auto text-center rounded-md'>
       <h5>Twitter</h5>
-        <p>{job.sector}</p>
+        <p>{job.socialMedia ? job.socialMedia.twitter :job.offeringCompany}</p>
   </div>
-    <div className='w-2/3 border-2 p-1 overflow-auto text-center rounded-md mt-1'>
-      <h5>Twitter</h5>
-        <p>{job.sector}</p> 
+    <div className='w-3/4 border-2 p-1 overflow-auto text-center rounded-md mt-1'>
+      <h5>Linkedin</h5>
+        <p>{job.socialMedia ? job.socialMedia.linkedIn :job.offeringCompany}</p> 
   </div>
-    <div className='w-2/3 border-2 p-1 overflow-auto text-center rounded-md mt-1'>
+    <div className='w-3/4 border-2 p-1 overflow-auto text-center rounded-md mt-1'>
       <h5>Twitter</h5>
-        <p>{job.sector}</p>
+      <p>{job.socialMedia ? job.socialMedia.twitter :job.offeringCompany}</p>
   </div>
 </div>
   
