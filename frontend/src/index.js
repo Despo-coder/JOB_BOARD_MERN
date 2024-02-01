@@ -6,6 +6,8 @@ import App from './App';
 import HomeScreen from './screens/HomeScreen';
 import JobScreen from './screens/JobScreen';
 import JobDetailScreen from './screens/JobDetailScreen';
+import ResourceScreen from './screens/ResourceScreen';
+import AllHustles from './screens/AllHustles';
 
 
 
@@ -17,6 +19,8 @@ const router = createBrowserRouter(
    
     <Route  path='/about' element={<JobScreen />} />
     <Route  path='/job/:id' element={<JobDetailScreen />} />
+    <Route  path='/resources' element={<ResourceScreen />} />
+    <Route  path='/all' element={<AllHustles />} />
     </Route>
   ),  
 );

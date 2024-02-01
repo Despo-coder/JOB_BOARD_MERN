@@ -15,11 +15,11 @@ const Navbar = () => {
       <h1 className='w-full text-3xl font-semibold text-primary'>Side Hustle World</h1>
       
       <ul className='hidden md:flex'>
-        <li className='p-4'>Home</li>
+        <li className='p-4'><Link to="/">Home</Link></li>
         
-        <li className='p-4'>Resources</li>
+        <li className='p-4'><Link to="/resources">Resources</Link></li>
         <li className='p-4'> <Link to="/about">About</Link></li>
-        <li className='p-4'>Contact</li>
+        <li className='p-4'><Link to="/all">Hustles</Link></li>
         <button className='btn-accent btn btn-lg mt-3 text-sm'>Login/Sign Up</button>
 
       </ul>

@@ -7,7 +7,7 @@ const JobDetailScreen = () => {
     const job = jobs.find(job =>{
         return job.id === Number(jobId)
     } )
-    console.log(job)
+   
    
   return (
     <>
@@ -26,7 +26,7 @@ const JobDetailScreen = () => {
     <div className=" container mx-auto mt-20 grid grid-cols-2 gap-4 ">
 
 <div className='gap-x-4'>
-  <img src="companyLogo.png" className="w-full className='mt-2'"/>
+  <img src="/img/images/logo-firefox.svg" className="h-10 w-10"  alt={job.jobTitle} />
 
   <h5 className="text-lg font-bold mt-2">{job.offeringCompany}</h5>
 
@@ -48,11 +48,11 @@ const JobDetailScreen = () => {
       <h5>Twitter</h5>
         <p>{job.socialMedia.twitter}</p>
   </div>
-    <div className='w-2/3 border-2 p-1 overflow-auto text-center rounded-md'>
+    <div className='w-2/3 border-2 p-1 overflow-auto text-center rounded-md mt-1'>
       <h5>Twitter</h5>
-        <p>{job.socialMedia.twitter}</p>
+        <p>{job.socialMedia.twitter}</p> 
   </div>
-    <div className='w-2/3 border-2 p-1 overflow-auto text-center rounded-md'>
+    <div className='w-2/3 border-2 p-1 overflow-auto text-center rounded-md mt-1'>
       <h5>Twitter</h5>
         <p>{job.socialMedia.twitter}</p>
   </div>
@@ -61,6 +61,7 @@ const JobDetailScreen = () => {
 </div>
 
 </div>
+<button className= "container ml-2 mx-auto w-1/6 bg-blue-500 text-white px-1 py-1 rounded mt-2">Back</button>
     </>
   );
 
