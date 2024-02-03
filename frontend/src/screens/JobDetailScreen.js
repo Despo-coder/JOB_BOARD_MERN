@@ -51,6 +51,7 @@ fetchJobs()
 <div>
   <h1 className="text-2xl font-semibold text-black">About the Job</h1>
   <p>{job.detailedInfo}</p>
+  <p>{job.prerequisites}</p>
   <div className='mt-12'>
     <h2 className="text-2xl font-semibold text-black">Resources</h2>
     <div className='w-3/4 border-2 p-1 overflow-auto text-center rounded-md'>

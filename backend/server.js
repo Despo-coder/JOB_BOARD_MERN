@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import connectDB from './configurations/db.js';
-import jobs from './data/jobs.js';
+import jobRoutes from './routes/jobRoutes.js';
 
 connectDB();
 
@@ -14,15 +14,8 @@ app.get('/', (req, res) => {
   res.send('Server is ready...');
 })
 
-app.get('/api/jobs', (req, res) => {
-  res.json(jobs);
-});
+app.use('/api/jobs', jobRoutes);
 
-app.get('/api/jobs/:id', (req, res) => {
-  const job = jobs.find((j) => j.id === Number(req.params.id));
-  res.json(job);
- 
-});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

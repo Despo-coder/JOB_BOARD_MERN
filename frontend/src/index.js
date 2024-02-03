@@ -8,6 +8,7 @@ import JobScreen from './screens/JobScreen';
 import JobDetailScreen from './screens/JobDetailScreen';
 import ResourceScreen from './screens/ResourceScreen';
 import AllHustles from './screens/AllHustles';
+import JobSearchResults from './screens/JobSearchResults';
 
 
 
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
     <Route  path='/jobs/:id' element={<JobDetailScreen />} />
     <Route  path='/resources' element={<ResourceScreen />} />
     <Route  path='/all' element={<AllHustles />} />
+    <Route path="/search-results" element={() => <JobSearchResults />} />
     </Route>
   ),  
 );

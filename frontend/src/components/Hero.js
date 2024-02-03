@@ -1,7 +1,15 @@
 import React from 'react'
+import { useState } from 'react'
 import { FaSearchLocation} from 'react-icons/fa'
+import axios from 'axios'
 
 const Hero = () => {
+
+  const handleSearch = async (e) => {
+    e.preventDefault()
+   
+  }
+
   return (
     <section id='hero'>
       {/* Container for Image & Content */}
