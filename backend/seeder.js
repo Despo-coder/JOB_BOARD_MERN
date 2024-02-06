@@ -18,13 +18,13 @@ connectDB();
 const importData = async () => {
   try {
  
-    // await JobModel.deleteMany();
-    // await User.deleteMany();
+    await JobModel.deleteMany();
+    await User.deleteMany();
 
-    // const createdUsers = await User.insertMany(users); //Insert The 
-    const admin = await User.findOne({ email: 'admin@admin.com' });
-
-    // const adminUser = createdUsers[0]._id; //Grab the Admin(first one entered)
+    const createdUsers = await User.insertMany(users); //Insert The 
+    //const admin = await User.findOne({ email: 'admin@admin.com' }); //Grab the Admin(first one entered)
+    const admin = createdUsers[0]._id
+    //const adminUser = createdUsers[0]._id; //Grab the Admin(first one entered)
     //Create a variable that has the assigned user as the Admin to be used initially
     const samplejobs = jobs.map((job) => {
       return { ...job, user: admin };
@@ -60,4 +60,4 @@ if (process.argv[2] === '-d') {
 }
 
 
-// console.log(process.argv[2]);
+console.log(process.argv[2]);

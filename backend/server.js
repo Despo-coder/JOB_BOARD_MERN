@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 dotenv.config();
 import connectDB from './configurations/db.js';
 import jobRoutes from './routes/jobRoutes.js';
@@ -11,6 +12,11 @@ connectDB();
 const port = process.env.PORT || 5000;
 
 const app = express();
+// Body Parser Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Cookie Parser Middleware
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
   res.send('Server is ready...');

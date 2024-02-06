@@ -1,5 +1,7 @@
+import { set } from "mongoose";
 import asyncHandler from "../middleware/asyncHandler.js";
 import UserModel from "../models/UserModel.js";
+import jwt from 'jsonwebtoken';
 
 
 //Resposibility: Authorize User
@@ -7,7 +9,30 @@ import UserModel from "../models/UserModel.js";
 //Access: Public
 
 const authUser = asyncHandler(async (req, res) => {
-   
+   console.log(req.body)
+   const { email, password } = req.body;
+   const user = await UserModel.findOne({ email });
+   if (user && (await user.matchPassword(password))) {
+    const token = jwt.sign({ id: user._id , isAdmin: user.IsAdmin}, process.env.JWT_SECRET,{ expiresIn: '2d' });
+    // if (user) {
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+        });
+    res.json({
+         _id: user._id,
+         name: user.name,
+         email: user.email,
+         isAdmin: user.IsAdmin,
+        //  token: user.getSignedJwtToken(),
+      });
+   }
+   else {
+    res.status(401);
+       throw new Error('Invalid Email or Password');
+   }
     res.send('AuthUser');
 })
 
@@ -25,7 +50,13 @@ const regUser = asyncHandler(async (req, res) => {
 //Access: Private
 const logout = asyncHandler(async (req, res) => {
    
-    res.send('Logged Out');
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'none',
+        expires: new Date(Date.now() + 1 * 1000),
+    });
+    res.status(200).json({ message: 'Logged out' });
 })
 
 //Resposibility: Get User Profile
