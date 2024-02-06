@@ -16,7 +16,7 @@ router.get('/', asyncHandler(async(req, res) => {
     const job = await JobModel.findById(req.params.id);
 
     if(job){
-      res.json(job);
+      return res.json(job);
     } else {
       res.status(404);
       throw new Error('Job not found');
