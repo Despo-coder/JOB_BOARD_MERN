@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import connectDB from './configurations/db.js';
 import jobRoutes from './routes/jobRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import { notFound, errorHandler } from './middleware/customMiddleware.js';
  
 connectDB();
@@ -18,10 +19,15 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/jobs', jobRoutes);
+app.use('/api/users', userRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  if(port){
+    console.log(`Server is running on port ${port}`);
+ }else{
+  console.log('Server is running on default port 5000');
+ }
 });
