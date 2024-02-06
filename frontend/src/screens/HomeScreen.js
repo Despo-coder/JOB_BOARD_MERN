@@ -1,27 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useGetJobsQuery } from '../slices/jobsApiSlice';
+import Loader from '../components/Loader';
+
 
 const HomeScreen = () => {
-   const [jobs, setJobs] = useState([]);
-   
 
-   useEffect(() => {
-      const fetchJobs = async () => {
-         const res = await fetch('/jobs');
-         const data = await res.json();
-         setJobs(data);
-      }
-      fetchJobs();
-   }, 
-   
-   []);
-      
-    
+   const { data: jobs , isError: error, isLoading} = useGetJobsQuery();
+
       return (
+         
         <>
-        
-        <div className='container mx-auto mb-6 mt-4'>
+        { isLoading ? (<Loader className='mx-auto items-center'/>) : error ? (<div>{error?.data?.message || error.error}</div>):(  <>     <div className='container mx-auto mb-6 mt-4'>
         <h1 className='text-3xl text-black font-semibold text-center lg:text-2xl lg:text-left'>
    <span className='text-accent'>Featured</span> Opportunities
     </h1>  
@@ -51,7 +41,9 @@ const HomeScreen = () => {
           </div>
         ))}
         
-     </div>
+     </div> </> ) }
+        
+
     
      </>
       )

@@ -1,26 +1,16 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useEffect, useState } from'react'
+import { useGetJobByIdQuery } from '../slices/jobsApiSlice'
+import Loader from '../components/Loader'
 
 const JobDetailScreen = () => {
-    const [job, setJob] = useState({})
+    
     const { id:jobId } = useParams()
-
-
-    useEffect(() => {
-const fetchJobs = async () => {
-       const res = await fetch(`/jobs/${jobId}`)
-        const data = await res.json()
-        setJob(data)
-}
-fetchJobs()
-
-    }, [jobId])
-   
+    const { data: job , isLoading, isError: error} = useGetJobByIdQuery(jobId)
    
   return (
     <>
-    <div className='flex justify-center items-center w-full h-44 px-4 text-black bg-slate-100 rounded-md '>
+    {isLoading ? (<Loader />) : error ?( <div>{error.data || error.error}</div>):(<> <div className='flex justify-center items-center w-full h-44 px-4 text-black bg-slate-100 rounded-md '>
     <div className='container mx-auto mb-6 mt-8'>
       <div className='flex justify-center mx-auto mt-4 mb-3 items-center text-black gap-2'>
            <div>
@@ -73,6 +63,7 @@ fetchJobs()
 </div>
 
 <button className= "container ml-2 mx-auto w-1/6 bg-blue-500 text-white px-1 py-1 rounded mt-2"><Link to='/'>Back</Link></button>
+   </>)}
     </>
   );
 
