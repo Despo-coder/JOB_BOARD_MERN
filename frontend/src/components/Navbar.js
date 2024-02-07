@@ -20,7 +20,7 @@ const Navbar = () => {
         <li className='p-4'><Link to="/resources">Resources</Link></li>
         <li className='p-4'> <Link to="/about">About</Link></li>
         <li className='p-4'><Link to="/all">Hustles</Link></li>
-        <button className='btn-accent btn btn-lg mt-3 text-sm'>Login/Sign Up</button>
+        <button className='btn-accent btn btn-lg mt-3 text-sm'><Link to="/login">Login/Sign-up</Link></button>
 
       </ul>
 
