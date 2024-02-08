@@ -1,4 +1,5 @@
-// App.js
+import {ToastContainer} from 'react-toastify';
+import'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -17,6 +18,8 @@ function App() {
       <Navbar />
       {isIndexRoute() && <Hero />}
       <Outlet />
+      <ToastContainer position="top-center"
+autoClose={2200}/>  
     </div>
   );
 }

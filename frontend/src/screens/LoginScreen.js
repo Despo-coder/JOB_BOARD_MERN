@@ -1,14 +1,48 @@
-import {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {useEffect, useState} from 'react'
+import {Link, useLocation, useNavigate} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import FormTemplate from '../components/FormTemplate'
+import Loader from '../components/Loader'
+import { useLoginMutation } from '../slices/usersApiSlice'
+import { setUserCredentials } from '../slices/authenticationSlice'
+import {toast} from 'react-toastify'
+
 
 const LoginScreen = () => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const location = useLocation()
+    
+    const [login, {isLoading}] = useLoginMutation()
+    const {userInfo} = useSelector(state => state.authenticate)
+
+    const {search}  = location
+    const params = new URLSearchParams(search)
+    const redirectTo = params.get('redirect') || '/'
+
+useEffect(() => {
+    if (userInfo) {
+        navigate(redirectTo)
+    }
+}, [userInfo, redirectTo, navigate])
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(email, password)
+        try {
+           const {data} = await login({email, password})
+           console.log(data)
+           dispatch(setUserCredentials({...data}))
+           navigate(redirectTo)
+           toast.success('Login Successful')
+          
+        } catch (error) {
+            toast.error(error?.data?.message || error.error)
+        }
     }
 
   return (
@@ -43,16 +77,17 @@ const LoginScreen = () => {
           <div className="flex items-center justify-between">
             <button 
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-                type="submit"
+                type="submit" disabled={isLoading}
             >
               Sign In
             </button>
             </div>
+            {isLoading && <Loader/>}
             </form>
         <div className="text-center text-sm text-gray-500">
             Don't have an account? {'   '}
             <Link 
-                to="/register" 
+                to={redirectTo ? `/register?redirect=${redirectTo}` : '/register'}
                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
             >
               Register

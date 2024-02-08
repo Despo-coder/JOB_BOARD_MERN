@@ -48,14 +48,14 @@ const authUser = asyncHandler(async (req, res) => {
 
 const regUser = asyncHandler(async (req, res) => {
    
-    const { name, email, password } = req.body;
+    const { fname, email, password } = req.body;
     const userExists = await UserModel.findOne({ email });
     if (userExists) {
         res.status(400);
         throw new Error('User Already Exists');
     }else{
         const user = await UserModel.create({
-            name,
+            fname,
             email,
             password,
         });
@@ -72,7 +72,7 @@ const regUser = asyncHandler(async (req, res) => {
                  });
             res.status(201).json({
                 _id: user._id,
-                name: user.name,
+                fname: user.fname.substring(0, 1).toUpperCase() + user.fname.substring(1,6),
                 email: user.email,
                 isAdmin: user.IsAdmin,
                 // token: user.getSignedJwtToken(),
@@ -93,8 +93,8 @@ const logout = asyncHandler(async (req, res) => {
     res.cookie('jwt', '', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'none',
-        expires: new Date(Date.now() + 1 * 1000),
+        sameSite: 'strict',
+        expires: new Date(Date.now(0) ),
     });
     res.status(200).json({ message: 'Logged out' });
     console.log('Logged Out')

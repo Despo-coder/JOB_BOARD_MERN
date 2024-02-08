@@ -1,12 +1,29 @@
-import React from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React , {useEffect} from 'react'
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom'
 import { useGetJobByIdQuery } from '../slices/jobsApiSlice'
 import Loader from '../components/Loader'
+import {  useSelector } from 'react-redux'
+
 
 const JobDetailScreen = () => {
     
     const { id:jobId } = useParams()
     const { data: job , isLoading, isError: error} = useGetJobByIdQuery(jobId)
+    const location = useLocation()
+    const navigate = useNavigate()
+
+
+    const {userInfo} = useSelector(state => state.authenticate)
+
+    const {search}  = location
+    const params = new URLSearchParams(search)
+    const redirectTo = params.get('redirect') || '/login'
+
+useEffect(() => {
+    if (!userInfo) {
+        navigate(redirectTo)
+    }
+}, [userInfo, redirectTo, navigate])
    
   return (
     <>
