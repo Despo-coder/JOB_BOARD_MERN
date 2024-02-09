@@ -13,10 +13,9 @@ const Navbar = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const userInfo = useSelector(state => state.authenticate.userInfo)
+    const {userInfo} = useSelector(state => state.authenticate)
     const [ApiLogout] = useLogoutMutation()
 
-console.log(userInfo)
 const toggleDropdown = () => {
   const dropdown = document.getElementById("dropdownDelay");
   if(dropdown.style.display === "none"){
@@ -29,12 +28,12 @@ dropdown.style.display = "block"
 
 
 const handlelogout = async () => {
-  console.log('CLicked')
+  
   try {
         await ApiLogout().unwrap()
         dispatch(logout())
       navigate('/login')
-      const dropdown = document.getElementById("dropdownDelay");
+      const dropdown = document.getElementById("dropdownDelay"); 
       dropdown.style.display = "none"
     } catch (error) {
         console.log(error)
@@ -57,7 +56,7 @@ const handlelogout = async () => {
         <li className='p-4'> <Link to="/about">About</Link></li>
         <li className='p-4'><Link to="/all">Hustles</Link></li>
        
-        {userInfo ? <li className='p-4'>{userInfo.data.fname}</li> : (<button className='btn-accent btn btn-lg mt-3 text-sm'><Link to="/login">Login</Link></button>)}
+        {userInfo ? <li className='p-4'>{userInfo.fname}</li> : (<button className='btn-accent btn btn-lg mt-3 text-sm'><Link to="/login">Login</Link></button>)}
         {userInfo ? <li className='p-4' id="dropdownDelayButton" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500" data-dropdown-trigger="hover" >
     
           <FaUserCircle size={20} className='cursor-pointer' onClick={toggleDropdown}/></li>: ''}
@@ -66,7 +65,7 @@ const handlelogout = async () => {
       <div id="dropdownDelay" className="z-10 hidden divide-y divide-gray-100 bg-white mt-32 text-center rounded-lg p-[-1] shadow w-1/3 dark:bg-gray-700">
     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
       <li>
-        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+        <Link to='/profile' className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</Link>
       </li>
       <li>
         <Link onClick={handlelogout} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign Out</Link>

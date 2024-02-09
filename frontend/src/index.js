@@ -13,21 +13,26 @@ import store from './store';
 import {Provider} from "react-redux";
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import PrivateRoute from './components/PrivateRoute';
+import ProfileScreen from './screens/ProfileScreen';
 
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-    <Route index={true} path='/' element={<HomeScreen />} />
+         <Route index={true} path='/' element={<HomeScreen />} />
    
-    <Route  path='/about' element={<JobScreen />} />
-    <Route  path='/login' element={<LoginScreen />} />
-    <Route  path='/register' element={<RegisterScreen />} />
-    <Route  path='/jobs/:id' element={<JobDetailScreen />} />
-    <Route  path='/resources' element={<ResourceScreen />} />
-    <Route  path='/all' element={<AllHustles />} />
-    <Route path="/search-results" element={() => <JobSearchResults />} />
+          <Route  path='/about' element={<JobScreen />} />
+          <Route  path='/login' element={<LoginScreen />} />
+          <Route  path='/register' element={<RegisterScreen />} />
+          <Route  path='/jobs/:id' element={<JobDetailScreen />} />
+          <Route  path='/resources' element={<ResourceScreen />} />
+          <Route  path='/all' element={<AllHustles />} />
+          <Route path='' element={<PrivateRoute/>}>
+    <Route path="/search-results" element={<JobSearchResults />} />
+    <Route path="/profile" element={<ProfileScreen/>} />
+       </Route>
     </Route>
   ),  
 );

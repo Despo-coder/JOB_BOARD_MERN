@@ -28,7 +28,7 @@ const authUser = asyncHandler(async (req, res) => {
     // req.user = user;
     res.json({
          _id: user._id,
-         name: user.name,
+         fname: user.fname.substring(0, 1).toUpperCase() + user.fname.substring(1,6),
          email: user.email,
          isAdmin: user.IsAdmin,
         //  token: user.getSignedJwtToken(),
@@ -38,8 +38,8 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(401);
        throw new Error('Invalid Email or Password');
    }
-    console.log(req.body)
-    console.log(req.user)
+    // console.log(req.body)
+    // console.log(req.user)
 })
 
 //Resposibility: Register User
@@ -72,7 +72,7 @@ const regUser = asyncHandler(async (req, res) => {
                  });
             res.status(201).json({
                 _id: user._id,
-                fname: user.fname.substring(0, 1).toUpperCase() + user.fname.substring(1,6),
+                fname: user.fname.substring(0, 1).toUpperCase() + user.fname.substring(1,8),
                 email: user.email,
                 isAdmin: user.IsAdmin,
                 // token: user.getSignedJwtToken(),
@@ -97,7 +97,7 @@ const logout = asyncHandler(async (req, res) => {
         expires: new Date(Date.now(0) ),
     });
     res.status(200).json({ message: 'Logged out' });
-    console.log('Logged Out')
+    // console.log('Logged Out')
 })
 
 //Resposibility: Get User Profile
@@ -126,9 +126,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
 const updateUserProfile = asyncHandler(async (req, res) => {
    
     const user = await UserModel.findOne(req.user._id);
-
+console.log(user)
     if (user) {
-        user.name = req.body.name || user.name;
+        user.fname = req.body.fname || user.fname;
         user.email = req.body.email || user.email;
       if (req.body.password) {
         user.password = req.body.password;
@@ -136,7 +136,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       const updatedUser = await user.save();
       res.status(200).json({ 
           _id: updatedUser._id,
-          name: updatedUser.name,
+          fname: updatedUser.fname,
           email: updatedUser.email,
           isAdmin: updatedUser.IsAdmin,
       });

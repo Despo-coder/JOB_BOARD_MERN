@@ -34,7 +34,7 @@ useEffect(() => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-           const {data} = await login({email, password})
+           const data = await login({email, password}).unwrap()
            console.log(data)
            dispatch(setUserCredentials({...data}))
            navigate(redirectTo)

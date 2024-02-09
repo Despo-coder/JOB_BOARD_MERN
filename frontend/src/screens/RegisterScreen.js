@@ -32,7 +32,7 @@ useEffect(() => {
     const handleSubmit = async(e) => {
         e.preventDefault()
         try {
-            const data = await register({email, password, fname})
+            const data = await register({email, password, fname}).unwrap()
             dispatch(setUserCredentials({...data}))
             navigate('/')
             console.log('Register')
