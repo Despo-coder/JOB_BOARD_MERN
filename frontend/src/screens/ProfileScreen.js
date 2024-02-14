@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FormTemplate from '../components/FormTemplate'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from '../components/Loader';
+import { useNavigate } from 'react-router-dom';
 import { useProfileMutation } from '../slices/usersApiSlice';
 import { setUserCredentials } from '../slices/authenticationSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,8 @@ const ProfileScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { userInfo } = useSelector((state) => state.authenticate);
     const [updateProfile] = useProfileMutation();
 
@@ -19,19 +21,24 @@ const ProfileScreen = () => {
     dropdown.style.display = "none"
 
     useEffect(() => {
+      
         setName(userInfo.fname);
         setEmail(userInfo.email);
-      }, [userInfo.email, userInfo.name]);
-      const dispatch = useDispatch();
-console.log(fname, email)
+      }, [userInfo.email, userInfo.fname]);
+
+
+
+      
+
 
 
       const submitHandler = async (e) => {
         e.preventDefault();
-        console.log(fname)
+        
         if (password !== confirmPassword) {
           toast.error('Passwords do not match');
         } else {
+          
           try {
             const res = await updateProfile({
               _id: userInfo._id,
@@ -39,8 +46,9 @@ console.log(fname, email)
               email:email,
               password:password,
             }).unwrap();
-            dispatch(setUserCredentials({ ...res }));
+            dispatch(setUserCredentials({...res}));
             toast.success('Profile updated successfully');
+            navigate('/');
           } catch (err) {
             toast.error(err?.data?.message || err.error);
           }
@@ -115,8 +123,8 @@ console.log(fname, email)
         >
           Update
         </button>
-        {/* <ToastContainer />
-          {loadingUpdateProfile && <Loader />} */}
+         <ToastContainer />
+          {/*{loadingUpdateProfile && <Loader />} */}
       </form>
     </FormTemplate>
   )

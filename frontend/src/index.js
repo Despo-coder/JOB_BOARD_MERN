@@ -15,6 +15,8 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import PrivateRoute from './components/PrivateRoute';
 import ProfileScreen from './screens/ProfileScreen';
+import AdminRoute from './components/AdminRoute';
+import JobListScreen from './screens/JobListScreen';
 
 
 
@@ -32,6 +34,10 @@ const router = createBrowserRouter(
           <Route path='' element={<PrivateRoute/>}>
     <Route path="/search-results" element={<JobSearchResults />} />
     <Route path="/profile" element={<ProfileScreen/>} />
+       </Route>
+          <Route path='' element={<AdminRoute/>}>
+    
+    <Route path="/admin/jobs" element={<JobListScreen/>} />
        </Route>
     </Route>
   ),  

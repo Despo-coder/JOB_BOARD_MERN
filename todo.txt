@@ -1,13 +1,12 @@
 Things to do Starting on Monday.
 
+
 1. Redux State Management - Done
 2. Search Capabilities
-3. Jobs Page
-4. Authentication
-5. User Profile
-6. User Settings
-7. User Profile Edit
-8. User Profile Delete
-9. User Profile Update
-10. Job Controller  -- Done
-11. Loading Component -- Done
+3. Jobs Page 
+4. Authentication - Done
+5. User Profile - Done
+6. User Profile Delete
+7. User Profile Update -done
+8. Job Controller  -- Done
+9. Loading Component -- Done
